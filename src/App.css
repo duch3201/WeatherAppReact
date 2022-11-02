@@ -1,5 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .App {
   text-align: center;
+}
+
+#bg {
+  background: rgb(175,11,222);
+  background: linear-gradient(339deg, rgba(175,11,222,1) 26%, rgba(11,48,240,1) 100%); 
+  color: white;
 }
 
 .App-logo {
