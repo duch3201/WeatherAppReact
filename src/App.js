@@ -5,7 +5,6 @@ import './App.css';
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes()
 let city = localStorage.getItem('city')
-let lang = localStorage.getItem('lang')
 
 
 class Topbar extends React.Component {
@@ -26,26 +25,32 @@ class Forecast extends React.Component {
   
 
   async componentDidMount() {
-    let sdata = "";
     let city = localStorage.getItem('city');
     let lang = localStorage.getItem('lang');
     let test = "http://localhost:5000/get-weather/"+city+"/"+lang
+    let apiurl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+process.env.APIKEY+"&lang=en&units=metric ";
     // GET request using fetch with async/await
-    fetch("https://my-json-server.typicode.com/duch3201/samplejsapi/responce")
+    fetch(apiurl)
     .then(response => response.json())
-    .then(data => sdata = data);
+    .then((data) => {
+      this.setState({
+        weather:data
+      });
+    });
 
-    console.log(sdata.ftemp);
+    console.log(weather);
 
   };
 
   render() {
     return (
-      <><h1 id="temp" class="text-9xl">temp</h1>
-      <h1 id="fl" class="text-xl pt-5 pb-2">feels like</h1>
-      <h1 id="ws" class="text-xl pb-2">wind speed</h1>
-      <h1 id="s" class="text-xl">status</h1>
-      </>
+      <div>
+        <h1 id="temp" class="text-9xl">{weather.temp}</h1>
+ 
+        <h1 id="fl" class="text-xl pt-5 pb-2">feels like</h1>
+        <h1 id="ws" class="text-xl pb-2">wind speed</h1>
+        <h1 id="s" class="text-xl">status</h1>
+      </div>
     );
 
   }
