@@ -8,7 +8,7 @@ let city = localStorage.getItem('city')
 let lang = localStorage.getItem('lang')
 
 
-class Welcome extends React.Component {
+class Topbar extends React.Component {
   render() {
     return <h1 class="text-2xl pt-4 pb-5 self-center">{time} · {this.props.name}</h1>;
   }
@@ -54,7 +54,7 @@ class Forecast extends React.Component {
 //var data = getWeather();
 //console.log(data)
 
-const element = <Welcome name={city} />;
+const element = <Topbar name={city} />;
 const weather = <Forecast name={"data"} />;
 const test = <requesttoapi/>
 
@@ -63,7 +63,6 @@ function App() {
     <div className="App">
       <div id="bg" class="w-screen h-screen">
         <div id="seminavbar">
-          <navbar/>
           <button class="float-right mr-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={localStorage.setItem("city", "warsaw")}>settings</button>
           <button class="float-left ml-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1">refresh</button>
         </div>
