@@ -13,21 +13,13 @@ class Topbar extends React.Component {
   }
 }
 
-class requesttoapi extends React.Component {
-  render() {
-    return (
-      <h1>requesttoapi</h1>
-    )
-  }
-}
-
 class Forecast extends React.Component {
   
 
   async componentDidMount() {
     let city = localStorage.getItem('city');
     let lang = localStorage.getItem('lang');
-    let test = "http://localhost:5000/get-weather/"+city+"/"+lang
+    //let test = "http://localhost:5000/get-weather/"+city+"/"+lang
     let apiurl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+process.env.APIKEY+"&lang=en&units=metric ";
     // GET request using fetch with async/await
     fetch(apiurl)
@@ -68,16 +60,6 @@ class Forecast extends React.Component {
         )
     }
 
-    return (
-      <div>
-        <h1 id="temp" class="text-9xl">{weather.temp}</h1>
- 
-        <h1 id="fl" class="text-xl pt-5 pb-2">feels like</h1>
-        <h1 id="ws" class="text-xl pb-2">wind speed</h1>
-        <h1 id="s" class="text-xl">status</h1>
-      </div>
-    );
-
   }
 }
 
@@ -86,7 +68,6 @@ class Forecast extends React.Component {
 
 const element = <Topbar name={city} />;
 const weather = <Forecast name={"data"} />;
-const test = <requesttoapi/>
 
 function App() {
   return (
