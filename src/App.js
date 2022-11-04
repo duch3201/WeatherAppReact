@@ -32,10 +32,19 @@ class Forecast extends React.Component {
     // GET request using fetch with async/await
     fetch(apiurl)
     .then(response => response.json())
-    .then((data) => {
-      this.setState({
-        weather:data
-      });
+    .then(
+        (data) => {
+            this.setState({
+                isLoaded : true,
+                weather:data
+            });
+        (error) => {
+            this.setState({
+                isLoaded : true,
+                error
+            })
+        }
+
     });
 
     console.log(weather);
@@ -43,6 +52,24 @@ class Forecast extends React.Component {
   };
 
   render() {
+    const {error, isLoaded, weather} = this.state;
+
+    if (error){
+        return <h1 class="text-9xl">Error in loading</h1>
+    } else if (!isLoaded) {
+        return <h1 class="text-9xl">Loading...</h1>
+    }else{
+        return (
+            <div>
+                {
+                    weather.map(weathe => (
+                        <h1>{weathe.weather.temp}</h1>
+                    ))
+                }
+            </div>
+        )
+    }
+
     return (
       <div>
         <h1 id="temp" class="text-9xl">{weather.temp}</h1>
