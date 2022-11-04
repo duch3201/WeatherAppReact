@@ -45,13 +45,6 @@ class Forecast extends React.Component {
     }else{
         return (
             <div>
-                {
-                    weather.map(weathe => (
-                        <h1>{weather.temp}</h1>
-                        
-                    ))
-                    
-                }
                 <h1 id="temp" class="text-9xl">{weather.temp}</h1>
                 <h1 id="fl" class="text-xl pt-5 pb-2">feels like</h1>
                 <h1 id="ws" class="text-xl pb-2">wind speed</h1>
