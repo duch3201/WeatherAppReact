@@ -63,7 +63,7 @@ class Forecast extends React.Component {
             <div>
                 {
                     weather.map(weathe => (
-                        <h1>{weathe.weather.temp}</h1>
+                        <h1>{weather.temp}</h1>
                     ))
                 }
             </div>
