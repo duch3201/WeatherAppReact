@@ -48,8 +48,8 @@ class Forecast extends React.Component {
   render() {
     const {error, isLoaded, weather} = this.state;
 
-    if (error){
-        return <h1 class="text-9xl">Error in loading</h1>
+    if (!isLoaded) {
+        return <h1 class="text-9xl">Loading...</h1>
     }else{
         return (
             <div>
