@@ -38,12 +38,6 @@ class Forecast extends React.Component {
                 isLoaded : true,
                 weather:data
             });
-        (error) => {
-            this.setState({
-                isLoaded : true,
-                error
-            })
-        }
 
     });
 
@@ -56,8 +50,6 @@ class Forecast extends React.Component {
 
     if (error){
         return <h1 class="text-9xl">Error in loading</h1>
-    } else if (!isLoaded) {
-        return <h1 class="text-9xl">Loading...</h1>
     }else{
         return (
             <div>
