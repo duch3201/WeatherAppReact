@@ -36,7 +36,7 @@ class Forecast extends React.Component {
         (data) => {
             this.setState({
                 isLoaded : true,
-                weather:data
+                weather : data
             });
 
     });
@@ -46,7 +46,7 @@ class Forecast extends React.Component {
   };
 
   render() {
-    const {error, isLoaded, weather} = this.state;
+    const {isLoaded, weather} = this.state;
 
     if (!isLoaded) {
         return <h1 class="text-9xl">Loading...</h1>
