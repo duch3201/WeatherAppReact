@@ -58,7 +58,7 @@ class Forecast extends React.Component {
                 <h1 id="s" class="text-xl">status</h1>
             </div>
         )
-    );
+
 
   }
 }
