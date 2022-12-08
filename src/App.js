@@ -1,11 +1,9 @@
-import { data } from 'autoprefixer';
 import React from 'react';
 import './App.css';
 
 var today = new Date();
 var time = today.getHours() + ":" + today.getMinutes()
 let city = localStorage.getItem('city')
-
 
 class Topbar extends React.Component {
   render() {
@@ -14,50 +12,56 @@ class Topbar extends React.Component {
 }
 
 class Forecast extends React.Component {
-  
+  state = {
+    isLoaded: false,
+    weather: {
+      temp: '',
+      fl: '',
+      ws: '',
+      s: ''
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({ isLoaded: false });
+  }
 
   async componentDidMount() {
     let city = localStorage.getItem('city');
     let lang = localStorage.getItem('lang');
-    //let test = "http://localhost:5000/get-weather/"+city+"/"+lang
     let apiurl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+process.env.APIKEY+"&lang=en&units=metric ";
-    // GET request using fetch with async/await
-    fetch(apiurl)
-    .then(response => response.json())
-    .then(
-        (data) => {
-            this.setState({
-                isLoaded : true,
-                weather : data
-            });
 
+    let response = await fetch(apiurl);
+    let data = await response.json();
+
+    this.setState({
+      isLoaded: true,
+      weather: {
+        temp: data.main.temp,
+        fl: data.main.feels_like,
+        ws: data.wind.speed,
+        s: data.weather[0].description
+      }
     });
-
-    console.log(weather);
-
-  };
+  }
 
   render() {
-    const {isLoaded, weather} = this.state;
+    const { isLoaded, weather } = this.state;
 
     if (!isLoaded) {
-        return <h1 class="text-9xl">Loading...</h1>
-    }else{
-        return (
-            <div>
-                <h1 id="temp" class="text-9xl">{weather.temp}</h1>
-                <h1 id="fl" class="text-xl pt-5 pb-2">feels like</h1>
-                <h1 id="ws" class="text-xl pb-2">wind speed</h1>
-                <h1 id="s" class="text-xl">status</h1>
-            </div>
-        )
+      return <h1 class="text-3xl pt-5">Loading...</h1>
+    } else {
+      return (
+        <div>
+          <h1 id="temp" class="text-9xl">{weather.temp}</h1>
+          <h1 id="fl" class="text-xl pt-5 pb-2">{weather.fl}</h1>
+          <h1 id="ws" class="text-xl pb-2">{weather.ws}</h1>
+          <h1 id="s" class="text-xl">{weather.s}</h1>
+        </div>
+      )
     }
-
   }
 }
-
-//var data = getWeather();
-//console.log(data)
 
 const element = <Topbar name={city} />;
 const weather = <Forecast name={"data"} />;
@@ -68,14 +72,14 @@ function App() {
       <div id="bg" class="w-screen h-screen">
         <div id="seminavbar">
           <button class="float-right mr-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={localStorage.setItem("city", "warsaw")}>settings</button>
-          <button class="float-left ml-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1">refresh</button>
+          <button class="float-left ml-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={() => this.forceUpdate(this)}>refresh</button>
         </div>
           <h5 class="">{element}</h5>
           <h1 class="text-9xl ">{weather}</h1>
       </div>
-
     </div>
   );
 }
 
 export default App;
+
