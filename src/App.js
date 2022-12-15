@@ -71,7 +71,7 @@ function App() {
     <div className="App">
       <div id="bg" class="w-screen h-screen">
         <div id="seminavbar">
-          <button class="float-right mr-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={localStorage.setItem("city", "warsaw")}>settings</button>
+          <button class="float-right mr-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={localStorage.setItem("city", "bydgoszcz")}>settings</button>
           <button class="float-left ml-5 mt-3 rounded-lg bg-emerald-800 pt-1 w-16 pb-1" onClick={() => this.forceUpdate(this)}>refresh</button>
         </div>
           <h5 class="">{element}</h5>
