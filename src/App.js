@@ -29,6 +29,11 @@ class Forecast extends React.Component {
   async componentDidMount() {
     let city = localStorage.getItem('city');
     let lang = localStorage.getItem('lang');
+
+    if (city == "") {
+      let city = "warsaw"
+    }
+
     let apiurl = "https://api.openweathermap.org/data/2.5/weather?q="+"bydgoszcz"+"&appid="+"e23ccc0152024d943c58994cda4d2e27"+"&lang=en&units=metric ";
 
     let response = await fetch(apiurl);
